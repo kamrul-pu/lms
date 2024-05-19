@@ -60,6 +60,7 @@ DJANGO_APPS = [
 PROJECT_APPS = [
     "core",
     "common",
+    "course",
 ]
 THIRD_PARTY_APPS = [
     "corsheaders",
