@@ -61,6 +61,7 @@ PROJECT_APPS = [
     "core",
     "common",
     "course",
+    "payment",
 ]
 THIRD_PARTY_APPS = [
     "corsheaders",
