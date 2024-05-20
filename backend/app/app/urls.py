@@ -1,6 +1,7 @@
 """
 Main URL Mapping of the app.
 """
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -22,6 +23,7 @@ urlpatterns = [
     path("api/v1/token/verify", TokenVerifyView.as_view(), name="token_verify"),
     # include user endpoints
     path("api/v1/users", include("core.rest.urls.user"), name="user-urls"),
+    path("api/v1/courses", include("course.rest.urls.base"), name="course-urls"),
 ]
 
 if settings.DEBUG:
