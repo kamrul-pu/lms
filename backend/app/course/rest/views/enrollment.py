@@ -12,7 +12,7 @@ from course.rest.serializers.enrollment import (
 
 class EnrollmentList(ListCreateAPIView):
     queryset = Enrollment().get_all_actives()
-    permission_classes = ()
+    permission_classes = (IsAuthenticated,)
     serializer_class = EnrollmentListSerializer
 
     def get_queryset(self):
@@ -21,11 +21,6 @@ class EnrollmentList(ListCreateAPIView):
         if user.is_staff or user.is_superuser:
             return queryset
         return queryset.filter(student_id=user.id)
-
-    def get_permissions(self):
-        if self.request.method == "POST":
-            return (IsAuthenticated(),)
-        return (IsAdminUser(),)
 
 
 class EnrollmentDetail(RetrieveUpdateDestroyAPIView):
