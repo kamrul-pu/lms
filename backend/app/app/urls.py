@@ -24,6 +24,7 @@ urlpatterns = [
     # include user endpoints
     path("api/v1/users", include("core.rest.urls.user"), name="user-urls"),
     path("api/v1/courses", include("course.rest.urls.base"), name="course-urls"),
+    path("api/v1/payment", include("payment.rest.urls.base"), name="payment-urls"),
 ]
 
 if settings.DEBUG:
