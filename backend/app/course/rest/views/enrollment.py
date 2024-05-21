@@ -18,6 +18,10 @@ class EnrollmentList(ListCreateAPIView):
     def get_queryset(self):
         queryset = self.queryset
         user = self.request.user
+        enrolled: bool = self.request.query_params.get("enrolled", None)
+        if enrolled:
+            queryset = queryset.filter(enrolled=True)
+
         if user.is_staff or user.is_superuser:
             return queryset
         return queryset.filter(student_id=user.id)
