@@ -15,6 +15,7 @@ class TransactionListSerializer(serializers.ModelSerializer):
             "amount",
             "transaction_id",
             "payment_status",
+            "card_type",
             "currency",
             "created_at",
             "courses",
