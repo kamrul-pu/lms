@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework import serializers
 
 from core.choices import UserKind
+from common.choices import Status
 
 User = get_user_model()
 
@@ -67,6 +68,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             "phone",
             "email",
             "gender",
+            "kind",
             "image",
             "password",
             "confirm_password",
@@ -79,7 +81,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         )  # Remove confirm_password from validated data
         user = User(**validated_data)  # Create a new user instance with validated data
         user.set_password(validated_data.get("password", ""))  # Set user's password
-        user.kind = UserKind.STUDENT
+        user.status = Status.DRAFT
         user.save()  # Save the user to the database
         return user  # Return the created user instance
 
