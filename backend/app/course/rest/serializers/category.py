@@ -7,6 +7,10 @@ from course.models import Category
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
+    total_courses = serializers.IntegerField(
+        read_only=True,
+    )
+
     class Meta:
         model = Category
         fields = (
@@ -17,6 +21,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
             "description",
             "icon_class",
             "serial_number",
+            "total_courses",
         )
         read_only_fields = (
             "id",

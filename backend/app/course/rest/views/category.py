@@ -1,5 +1,7 @@
 """Views for category model"""
 
+from django.db.models import Count
+
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import (
     IsAuthenticated,
@@ -18,7 +20,9 @@ from course.rest.serializers.category import (
 class CategoryList(ListCreateAPIView):
     permission_classes = ()
     serializer_class = CategoryListSerializer
-    queryset = Category().get_all_actives()
+    queryset = (
+        Category().get_all_actives().annotate(total_courses=Count("category_courses"))
+    )
 
     def get_permissions(self):
         if self.request.method == "GET":
