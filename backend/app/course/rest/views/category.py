@@ -1,7 +1,12 @@
 """Views for category model"""
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAdminUser,
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+)
 
 from course.models import Category
 from course.rest.serializers.category import (
@@ -17,7 +22,7 @@ class CategoryList(ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == "GET":
-            return (IsAuthenticated(),)
+            return (AllowAny(),)
         return (IsAdminUser(),)
 
     def get_queryset(self):
