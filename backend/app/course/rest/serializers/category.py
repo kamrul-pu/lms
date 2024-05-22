@@ -18,6 +18,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
             "uid",
             "name",
             "slug",
+            "image",
             "description",
             "icon_class",
             "serial_number",
@@ -36,10 +37,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
 
 class CategoryDetailSerializer(CategoryListSerializer):
     class Meta(CategoryListSerializer.Meta):
-        fields = CategoryListSerializer.Meta.fields + (
-            "image",
-            "created_at",
-        )
+        fields = CategoryListSerializer.Meta.fields + ("created_at",)
 
     def update(self, instance, validated_data):
         user = self.context.get("request").user

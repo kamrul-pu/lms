@@ -45,6 +45,7 @@ class CourseDetailSerializer(CourseListSerializer):
 
     class Meta(CourseListSerializer.Meta):
         fields = CourseListSerializer.Meta.fields + (
+            "description",
             "image",
             "created_at",
         )
