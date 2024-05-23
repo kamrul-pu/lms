@@ -2,7 +2,11 @@
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import (
+    IsAdminUser,
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
+)
 
 from course.rest.serializers.courses import CourseListSerializer, CourseDetailSerializer
 from course.models import Course, Category
@@ -28,7 +32,7 @@ class CourseList(ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == "GET":
-            return (IsAuthenticated(),)
+            return (IsAuthenticatedOrReadOnly(),)
         return (IsAdminUser(),)
 
 
