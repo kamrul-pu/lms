@@ -21,6 +21,11 @@ class EnrollmentListSerializer(serializers.ModelSerializer):
             "uid",
         )
 
+    def create(self, validated_data):
+        user = self.context.get("request").user
+        validated_data["student_id"] = user.id
+        return super().create(validated_data)
+
 
 class EnrollmentDetailSerializer(EnrollmentListSerializer):
     class Meta(EnrollmentListSerializer.Meta):
