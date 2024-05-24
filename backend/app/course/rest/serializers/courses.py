@@ -42,11 +42,13 @@ class CourseListSerializer(serializers.ModelSerializer):
 class CourseDetailSerializer(CourseListSerializer):
     instructor = UserListSerializer()
     category = CategoryListSerializer()
+    is_enrolled = serializers.BooleanField(read_only=True)
 
     class Meta(CourseListSerializer.Meta):
         fields = CourseListSerializer.Meta.fields + (
             "description",
             "image",
+            "is_enrolled",
             "created_at",
         )
 

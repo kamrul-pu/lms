@@ -1,5 +1,7 @@
 """Views related to Course model"""
 
+from django.db.models import Exists, OuterRef
+
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from rest_framework.permissions import (
@@ -9,7 +11,7 @@ from rest_framework.permissions import (
 )
 
 from course.rest.serializers.courses import CourseListSerializer, CourseDetailSerializer
-from course.models import Course, Category
+from course.models import Course, Category, Enrollment
 
 
 class CourseList(ListCreateAPIView):
@@ -46,3 +48,16 @@ class CourseDetail(RetrieveUpdateDestroyAPIView):
         if self.request.method == "GET":
             return (IsAuthenticated(),)
         return (IsAdminUser(),)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        user = self.request.user
+        # Annotate the queryset with 'is_enrolled' field
+        queryset = queryset.annotate(
+            is_enrolled=Exists(
+                Enrollment.objects.filter(
+                    course=OuterRef("pk"), student=user, enrolled=True
+                )
+            )
+        )
+        return queryset
