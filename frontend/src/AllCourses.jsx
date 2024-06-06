@@ -37,9 +37,9 @@ const AllCourses = () => {
   function fetchData(url) {
     try {
       axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${access_token}`
-        }
+        // headers: {
+        //   Authorization: `Bearer ${access_token}`
+        // }
       })
         .then((res) => {
           setNextUrl(res.data.next)
