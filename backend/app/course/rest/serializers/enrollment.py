@@ -23,24 +23,17 @@ class EnrollmentListSerializer(serializers.ModelSerializer):
             "uid",
         )
 
-    def validate(self, attrs):
+    def create(self, validated_data):
         user = self.context.get("request").user
-        course_id = attrs.get("course", None)
+        validated_data["student_id"] = user.id
+        course_id = validated_data.get("course", None)
         enrolled = (
             Enrollment()
             .get_all_actives()
             .filter(student_id=user.id, course_id=course_id)
         )
         if enrolled.exists():
-            raise serializers.ValidationError(
-                detail="Student is already enrolled in this course",
-                code=status.HTTP_400_BAD_REQUEST,
-            )
-        return super().validate(attrs)
-
-    def create(self, validated_data):
-        user = self.context.get("request").user
-        validated_data["student_id"] = user.id
+            return enrolled.first()
         return super().create(validated_data)
 
 
