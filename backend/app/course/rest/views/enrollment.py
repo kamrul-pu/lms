@@ -11,7 +11,7 @@ from course.rest.serializers.enrollment import (
 
 
 class EnrollmentList(ListCreateAPIView):
-    queryset = Enrollment().get_all_actives()
+    queryset = Enrollment().get_all_actives().select_related("course")
     permission_classes = (IsAuthenticated,)
     serializer_class = EnrollmentListSerializer
 
