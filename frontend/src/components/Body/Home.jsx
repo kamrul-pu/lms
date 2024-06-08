@@ -8,15 +8,7 @@ const Home = () => {
     return (
         <>
             {/* Start Background image */}
-            <section className="showcase" style={{
-                backgroundImage: `url(${ab})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                minHeight: '70vh', // Adjust the height here
-                display: 'flex',
-                alignItems: 'center', // Vertically center content
-            }}>
+            <section className="showcase mt-5" >
                 <div className="overlay"></div>
                 <div className="text">
                     <h1 className='head'>Never stop learning.<br /> Never stop growing.</h1>
