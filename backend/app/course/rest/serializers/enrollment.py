@@ -8,6 +8,9 @@ from course.rest.serializers.courses import CourseListSerializer
 
 class EnrollmentListSerializer(serializers.ModelSerializer):
     course = CourseListSerializer(read_only=True)
+    course_id = serializers.IntegerField(
+        write_only=True,
+    )
 
     class Meta:
         model = Enrollment
@@ -27,7 +30,6 @@ class EnrollmentListSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = self.context.get("request").user
-        validated_data["student_id"] = user.id
         course_id = validated_data.get("course_id", None)
         enrolled = (
             Enrollment()
@@ -36,7 +38,11 @@ class EnrollmentListSerializer(serializers.ModelSerializer):
         )
         if enrolled.exists():
             return enrolled.first()
-        return super().create(validated_data)
+        enrollment = Enrollment.objects.create(
+            student_id=user.id,
+            course_id=course_id,
+        )
+        return enrollment
 
 
 class EnrollmentDetailSerializer(EnrollmentListSerializer):

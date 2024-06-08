@@ -32,6 +32,7 @@ const CourseDetail = () => {
   const enrollCourse = async () => {
     try {
       const formData = new FormData();
+      console.log("course data", courseData)
       formData.append('course_id', courseData.id);
       await axios.post("http://127.0.0.1:8000/api/v1/courses/enrollments", formData, {
         headers: {

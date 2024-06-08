@@ -40,8 +40,11 @@ def sslcommerz_payment_gateway(request, amount, phone, city, address):
     post_body["currency"] = "BDT"
     post_body["tran_id"] = generator_trangection_id()
     post_body["success_url"] = "http://localhost:8000/api/v1/payment/success"
+    # post_body["success_url"] = "http://localhost:3000/payment-success"
     post_body["fail_url"] = "http://localhost:8000/api/v1/payment/failed"
+    # post_body["fail_url"] = "http://localhost:3000/payment-failed"
     post_body["cancel_url"] = "http://localhost:8000/api/v1/payment/cancel"
+    # post_body["cancel_url"] = "http://localhost:3000/payment-cancel"
     post_body["emi_option"] = 0
     post_body["cus_name"] = user.first_name + " " + user.last_name
     post_body["cus_email"] = user.email

@@ -10,6 +10,10 @@ import AllCourses from './Body/AllCourses';
 import Category from './Body/Category';
 import CategoryCourses from './Body/CategoryCourses';
 import CourseDetail from './Body/CourseDetail';
+import PendingEnrollments from './Body/PendingEnrollments';
+import PaymentSuccess from './Body/PaymentSuccess';
+import PaymentCancelled from './Body/PaymentCancell';
+import PaymentFailed from './Body/PaymentFailed';
 
 const Main = () => {
     return (
@@ -22,7 +26,11 @@ const Main = () => {
                 <Route path='/courses' element={<AllCourses />} />
                 <Route path='/category' element={<Category />} />
                 <Route path='/course/category/:category_slug' element={<CategoryCourses />} />
-                <Route path='courses/:course_slug' element={<CourseDetail />} />
+                <Route path='/courses/:course_slug' element={<CourseDetail />} />
+                <Route path='/pending-enrollment' element={<PendingEnrollments />} />
+                <Route path='/payment-success' element={<PaymentSuccess />} />
+                <Route path='/payment-cancel' element={<PaymentCancelled />} />
+                <Route path='/payment-failed' element={<PaymentFailed />} />
             </Routes>
             <Footer />
         </BrowserRouter>

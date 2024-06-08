@@ -128,7 +128,7 @@ class Enrollment(BaseModelWithUID):
 
     def __str__(self):
         # return f"{self.user.username} enrolled in {self.course.title}"
-        return f"{self.student.first_name} enrolled in {self.course.name}"
+        return f"{self.student.first_name} enrolled in {self.course}"
 
 
 class Lesson(NameSlugDescriptionBaseModel):

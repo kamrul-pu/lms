@@ -53,12 +53,12 @@ const AllCourses = () => {
 
   return (
     <div className='container mt-4'>
-      <div class="text-center wow fadeInUp">
-        <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
-        <h1 class="mb-5">All Courses</h1>
+      <div className="text-center wow fadeInUp">
+        <h6 className="section-title bg-white text-center text-primary px-3">Courses</h6>
+        <h1 className="mb-5">All Courses</h1>
       </div>    <div className='row mb-4'>
         {courseData && courseData.map((course, index) =>
-          <div className='col-md-3 mb-4'>
+          <div className='col-md-3 mb-4' key={index}>
             <div className="card">
               <Link to={`/courses/${course.slug}`}><img src={course.image} height={200} className="card-img-top" alt={course.name} /></Link>
               <div className="card-body">
